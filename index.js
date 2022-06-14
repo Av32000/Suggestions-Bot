@@ -1,7 +1,11 @@
 const { Intents, Client, Constants } = require('discord.js')
 const dotenv = require('dotenv')
+const fs = require('fs')
+const path = require('path')
 
 dotenv.config()
+
+let serversPath = path.join(__dirname, 'servers.json');
 
 const client = new Client({
   intents: [
@@ -107,6 +111,11 @@ client.on('ready', () => {
 
   client.user.setUsername('SuggestionBot');
 
+  if (fs.existsSync(path)) {
+    console.log("Creating servers.json file");
+    fs.appendFileSync(serversPath, '{1:1}');
+  }
+
   console.log("The bot is ready !")
 })
 
@@ -117,23 +126,23 @@ client.on('interactionCreate', async (interaction) => {
     if (commandName == "setup") {
       let file = require('./commands/setup')
       let instance = new file
-      instance.exec(interaction, options.getChannel('channel'));
+      instance.exec(interaction, options.getChannel('channel'), serversPath);
     } else if (commandName == "suggestion") {
       let file = require('./commands/suggestion')
       let instance = new file
-      instance.exec(interaction, options.getString('suggestion'));
+      instance.exec(interaction, options.getString('suggestion'), serversPath);
     } else if (commandName == "accept") {
       let file = require('./commands/accept')
       let instance = new file
-      instance.exec(interaction, options.getString('suggestion'));
+      instance.exec(interaction, options.getString('suggestion'), serversPath);
     } else if (commandName == "refuse") {
       let file = require('./commands/refuse')
       let instance = new file
-      instance.exec(interaction, options.getString('suggestion'));
+      instance.exec(interaction, options.getString('suggestion'), serversPath);
     } else if (commandName == "comment") {
       let file = require('./commands/comment')
       let instance = new file
-      instance.exec(interaction, options.getString('suggestion'), options.getString('comment'));
+      instance.exec(interaction, options.getString('suggestion'), options.getString('comment'), serversPath);
     }
   }
 })

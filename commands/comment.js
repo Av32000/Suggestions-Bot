@@ -1,9 +1,8 @@
 const { MessageEmbed } = require('discord.js');
 const JSON = require('jsonfile')
-const path = "C:\\Users\\Alexis\\Desktop\\Programmes\\Discord\\Suggestions-Bot\\servers.json"
 
 class Command {
-  async exec(interaction, suggestion, comment) {
+  async exec(interaction, suggestion, comment, path) {
     let guildID = interaction.guild.id;
     const servers = JSON.readFileSync(path);
 

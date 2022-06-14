@@ -36,6 +36,20 @@ client.on('ready', () => {
       ]
     })
 
+    commands?.create({
+      name: "suggestion",
+      description: "Permet de faire une suggestion",
+      usage: "suggestion <suggestion>",
+      options: [
+        {
+          name: "suggestion",
+          description: "Votre suggestion",
+          type: Constants.ApplicationCommandOptionTypes.STRING,
+          required: true
+        }
+      ]
+    })
+
   });
 
   client.user.setActivity({
@@ -56,6 +70,10 @@ client.on('interactionCreate', async (interaction) => {
       let file = require('./commands/setup')
       let instance = new file
       instance.exec(interaction, options.getChannel('channel'));
+    } else if (commandName == "suggestion") {
+      let file = require('./commands/suggestion')
+      let instance = new file
+      instance.exec(interaction, options.getString('suggestion'));
     }
   }
 })

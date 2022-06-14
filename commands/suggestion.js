@@ -33,6 +33,9 @@ class Command {
           .setTitle("Nouvelle suggestion de " + interaction.user.tag)
           .setDescription(suggestion)
         ]
+      }).then(message => {
+        message.react('✅');
+        message.react('❌');
       })
 
       interaction.reply({

@@ -49,7 +49,6 @@ client.on('ready', () => {
         }
       ]
     })
-
   });
 
   client.user.setActivity({

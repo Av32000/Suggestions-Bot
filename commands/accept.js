@@ -35,6 +35,14 @@ class Command {
             ]
           })
         } else {
+          if (message.embeds == undefined || message.embeds == null || message.embeds.length == 0) {
+            return interaction.reply({
+              embeds: [new MessageEmbed()
+                .setColor('#ff0000')
+                .setTitle('Cette suggestion n\'est pas valide')
+              ]
+            })
+          }
           let lastEmbed = message.embeds[0];
 
           let title = lastEmbed.title.split(" -")[0] + " - Acceptée";

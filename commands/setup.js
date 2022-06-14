@@ -17,6 +17,15 @@ class Command {
           })
         }
 
+        if (channel.type != 'GUILD_TEXT') {
+          return interaction.reply({
+            embeds: [new MessageEmbed()
+              .setColor('#ff0000')
+              .setTitle('Veuillez spécifier un salon de suggestion valide')
+            ]
+          })
+        }
+
         servers[guildID] = { channel: channel.id };
 
         JSON.writeFile(path, servers, function (err) {

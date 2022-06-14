@@ -64,7 +64,7 @@ class Command {
 
         }
 
-      });
+      }).catch(console.error);
     }
   }
 }

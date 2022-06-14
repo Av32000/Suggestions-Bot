@@ -14,7 +14,7 @@ Un bot Discord très complet qui permet a vos membres de faire des suggestions. 
 ## Configuration
 
 Pour configurer le bot, il vous suffit de créer un fichier `.env` dans le dossier du bot et d'y ajouter la ligne : 
-``TOKEN=<TOKEN>``
+``TOKEN=<TOKEN>``. Ensuite, créez un fichier `.servers.json` dans le dossier du bot et d'y ajouter la ligne : ``{"1":1}``.
 
 ## Commandes
 

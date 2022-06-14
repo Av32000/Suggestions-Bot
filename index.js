@@ -14,6 +14,100 @@ const client = new Client({
   ]
 })
 
+client.on("guildCreate", guild => {
+  let commands
+
+  if (guild) {
+    commands = guild.commands
+  } else {
+    commands = client.application.commands
+  }
+
+  commands?.create({
+    name: "setup",
+    description: "Permet de verifier la configuration du bot",
+    usage: "setup",
+    options: [
+      {
+        name: "channel",
+        description: "Le salon des suggestions",
+        type: Constants.ApplicationCommandOptionTypes.CHANNEL,
+        required: false
+      }
+    ]
+  })
+
+  commands?.create({
+    name: "suggestion",
+    description: "Permet de faire une suggestion",
+    usage: "suggestion <suggestion>",
+    options: [
+      {
+        name: "suggestion",
+        description: "Votre suggestion",
+        type: Constants.ApplicationCommandOptionTypes.STRING,
+        required: true
+      }
+    ]
+  })
+
+  commands?.create({
+    name: "accept",
+    description: "Permet de valider une suggestion",
+    usage: "accept <suggestion>",
+    options: [
+      {
+        name: "suggestion",
+        description: "L'id du message de la suggestion",
+        type: Constants.ApplicationCommandOptionTypes.STRING,
+        required: true
+      }
+    ]
+  })
+
+  commands?.create({
+    name: "refuse",
+    description: "Permet de refuser une suggestion",
+    usage: "refuse <suggestion>",
+    options: [
+      {
+        name: "suggestion",
+        description: "L'id du message de la suggestion",
+        type: Constants.ApplicationCommandOptionTypes.STRING,
+        required: true
+      }
+    ]
+  })
+
+  commands?.create({
+    name: "comment",
+    description: "Permet de faire un commentaire sur une suggestion",
+    usage: "comment <suggestion> <comment>",
+    options: [
+      {
+        name: "suggestion",
+        description: "Votre suggestion",
+        type: Constants.ApplicationCommandOptionTypes.STRING,
+        required: true
+      },
+      {
+        name: "comment",
+        description: "Votre commentaire",
+        type: Constants.ApplicationCommandOptionTypes.STRING,
+        required: true
+      }
+    ]
+  })
+
+  commands?.create({
+    name: "help",
+    description: "Affiche la liste des commandes",
+    usage: "help",
+  })
+
+  console.log(`Joined guild ${guild.name}`)
+})
+
 client.on('ready', () => {
   client.guilds.cache.forEach(element => {
     let guildID = element.id;

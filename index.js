@@ -102,6 +102,12 @@ client.on('ready', () => {
       ]
     })
 
+    commands?.create({
+      name: "help",
+      description: "Affiche la liste des commandes",
+      usage: "help",
+    })
+
   });
 
   client.user.setActivity({
@@ -143,6 +149,10 @@ client.on('interactionCreate', async (interaction) => {
       let file = require('./commands/comment')
       let instance = new file
       instance.exec(interaction, options.getString('suggestion'), options.getString('comment'), serversPath);
+    } else if (commandName == "help") {
+      let file = require('./commands/help')
+      let instance = new file
+      instance.exec(interaction, serversPath);
     }
   }
 })

@@ -63,6 +63,20 @@ client.on('ready', () => {
         }
       ]
     })
+
+    commands?.create({
+      name: "refuse",
+      description: "Permet de refuser une suggestion",
+      usage: "refuse <suggestion>",
+      options: [
+        {
+          name: "suggestion",
+          description: "L'id du message de la suggestion",
+          type: Constants.ApplicationCommandOptionTypes.STRING,
+          required: true
+        }
+      ]
+    })
   });
 
   client.user.setActivity({
@@ -89,6 +103,10 @@ client.on('interactionCreate', async (interaction) => {
       instance.exec(interaction, options.getString('suggestion'));
     } else if (commandName == "accept") {
       let file = require('./commands/accept')
+      let instance = new file
+      instance.exec(interaction, options.getString('suggestion'));
+    } else if (commandName == "refuse") {
+      let file = require('./commands/refuse')
       let instance = new file
       instance.exec(interaction, options.getString('suggestion'));
     }

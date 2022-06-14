@@ -38,10 +38,10 @@ class Command {
         } else {
           let lastEmbed = message.embeds[0];
 
-          let title = lastEmbed.title.split(" -")[0] + " - Acceptée";
+          let title = lastEmbed.title.split("-")[0] + "- Refusée";
 
           let embed = new MessageEmbed()
-            .setColor('#00ff55')
+            .setColor('#ff0000')
             .setTitle(title)
             .setDescription(lastEmbed.description)
             .addFields(lastEmbed.fields)
@@ -51,7 +51,7 @@ class Command {
           interaction.reply({
             embeds: [new MessageEmbed()
               .setColor('#00ff55')
-              .setTitle('La suggestion a bien été acceptée')
+              .setTitle('La suggestion a bien été refusée')
             ]
           })
 

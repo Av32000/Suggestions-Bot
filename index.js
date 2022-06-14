@@ -49,6 +49,20 @@ client.on('ready', () => {
         }
       ]
     })
+
+    commands?.create({
+      name: "accept",
+      description: "Permet de valider une suggestion",
+      usage: "accept <suggestion>",
+      options: [
+        {
+          name: "suggestion",
+          description: "L'id du message de la suggestion",
+          type: Constants.ApplicationCommandOptionTypes.STRING,
+          required: true
+        }
+      ]
+    })
   });
 
   client.user.setActivity({
@@ -71,6 +85,10 @@ client.on('interactionCreate', async (interaction) => {
       instance.exec(interaction, options.getChannel('channel'));
     } else if (commandName == "suggestion") {
       let file = require('./commands/suggestion')
+      let instance = new file
+      instance.exec(interaction, options.getString('suggestion'));
+    } else if (commandName == "accept") {
+      let file = require('./commands/accept')
       let instance = new file
       instance.exec(interaction, options.getString('suggestion'));
     }

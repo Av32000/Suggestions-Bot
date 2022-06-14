@@ -3,15 +3,7 @@ const JSON = require('jsonfile')
 const path = "C:\\Users\\Alexis\\Desktop\\Programmes\\Discord\\Suggestions-Bot\\servers.json"
 
 class Command {
-  async exec(interaction, suggestion) {
-    if (!interaction.member.permissions.has('ADMINISTRATOR')) {
-      return interaction.reply({
-        embeds: [new MessageEmbed()
-          .setColor('#ff0000')
-          .setTitle('Vous n\'avez pas la permission d\'utiliser cette commande')
-        ]
-      })
-    }
+  async exec(interaction, suggestion, comment) {
     let guildID = interaction.guild.id;
     const servers = JSON.readFileSync(path);
 
@@ -35,25 +27,37 @@ class Command {
         })
       }
 
-      channel.send({
-        embeds: [new MessageEmbed()
-          .setColor('#ff7700')
-          .setTitle("Suggestion de " + interaction.user.tag)
-          .setDescription(suggestion)
-        ]
-      }).then(message => {
-        message.react('✅');
-        message.react('❌');
-      })
+      channel.messages.fetch(`${suggestion}`).then(message => {
+        if (message == null) {
+          return interaction.reply({
+            embeds: [new MessageEmbed()
+              .setColor('#ff0000')
+              .setTitle('Cette suggestion n\'existe pas')
+            ]
+          })
+        } else {
+          let lastEmbed = message.embeds[0];
 
-      interaction.reply({
-        embeds: [new MessageEmbed()
-          .setColor('#00ff37')
-          .setTitle('Votre suggestion a bien été envoyée')
-        ]
-      })
+          let embed = new MessageEmbed()
+            .setColor(lastEmbed.color)
+            .setTitle(lastEmbed.title)
+            .setDescription(lastEmbed.description)
+            .addFields(lastEmbed.fields)
+            .addField('Commentaire de ' + interaction.user.tag, comment)
+
+          message.edit({ embeds: [embed] });
+
+          interaction.reply({
+            embeds: [new MessageEmbed()
+              .setColor('#00ff55')
+              .setTitle('Le commentaire a bien été ajouté')
+            ]
+          })
+
+        }
+
+      });
     }
-
   }
 }
 module.exports = Command

@@ -77,6 +77,27 @@ client.on('ready', () => {
         }
       ]
     })
+
+    commands?.create({
+      name: "comment",
+      description: "Permet de faire un commentaire sur une suggestion",
+      usage: "comment <suggestion> <comment>",
+      options: [
+        {
+          name: "suggestion",
+          description: "Votre suggestion",
+          type: Constants.ApplicationCommandOptionTypes.STRING,
+          required: true
+        },
+        {
+          name: "comment",
+          description: "Votre commentaire",
+          type: Constants.ApplicationCommandOptionTypes.STRING,
+          required: true
+        }
+      ]
+    })
+
   });
 
   client.user.setActivity({
@@ -109,6 +130,10 @@ client.on('interactionCreate', async (interaction) => {
       let file = require('./commands/refuse')
       let instance = new file
       instance.exec(interaction, options.getString('suggestion'));
+    } else if (commandName == "comment") {
+      let file = require('./commands/comment')
+      let instance = new file
+      instance.exec(interaction, options.getString('suggestion'), options.getString('comment'));
     }
   }
 })

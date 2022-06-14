@@ -22,6 +22,7 @@ Pour configurer le bot, il vous suffit de créer un fichier `.env` dans le dossi
 - ``/accept <id>``
 - ``/refuse <id>``
 - ``/comment <id>``
+- ``/help``
 
 ## Utilisation
 

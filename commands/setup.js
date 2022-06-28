@@ -17,7 +17,7 @@ class Command {
           })
         }
 
-        if (channel.type != 'GUILD_TEXT') {
+        if (channel.type != 'GUILD_TEXT' || interaction.guild.channels.cache.get(channel.id) == undefined) {
           return interaction.reply({
             embeds: [new MessageEmbed()
               .setColor('#ff0000')
@@ -48,6 +48,14 @@ class Command {
             ]
           })
         } else {
+          if (channel.type != 'GUILD_TEXT' || interaction.guild.channels.cache.get(channel.id) == undefined) {
+            return interaction.reply({
+              embeds: [new MessageEmbed()
+                .setColor('#ff0000')
+                .setTitle('Veuillez spécifier un salon de suggestion valide')
+              ]
+            })
+          }
           servers[guildID] = { channel: channel.id };
 
           JSON.writeFile(path, servers, function (err) {

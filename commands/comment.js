@@ -9,7 +9,7 @@ class Command {
       return interaction.reply({
         embeds: [new MessageEmbed()
           .setColor('#ff0000')
-          .setTitle('Vous n\'avez pas la permission d\'utiliser cette commande')
+          .setTitle('Vous n\'avez pas la permission d\'utiliser cette commande. Nécessite : MANAGE_MESSAGES')
         ]
       })
     }

@@ -3,14 +3,6 @@ const JSON = require('jsonfile')
 
 class Command {
   async exec(interaction, suggestion, path) {
-    if (!interaction.member.permissions.has('ADMINISTRATOR')) {
-      return interaction.reply({
-        embeds: [new MessageEmbed()
-          .setColor('#ff0000')
-          .setTitle('Vous n\'avez pas la permission d\'utiliser cette commande')
-        ]
-      })
-    }
     let guildID = interaction.guild.id;
     const servers = JSON.readFileSync(path);
 

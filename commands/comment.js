@@ -5,7 +5,14 @@ class Command {
   async exec(interaction, suggestion, comment, path) {
     let guildID = interaction.guild.id;
     const servers = JSON.readFileSync(path);
-
+    if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
+      return interaction.reply({
+        embeds: [new MessageEmbed()
+          .setColor('#ff0000')
+          .setTitle('Vous n\'avez pas la permission d\'utiliser cette commande')
+        ]
+      })
+    }
     if (servers[guildID] === undefined || servers[guildID] === null) {
       return interaction.reply({
         embeds: [new MessageEmbed()

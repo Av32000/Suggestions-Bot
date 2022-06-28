@@ -3,7 +3,7 @@ const JSON = require('jsonfile')
 
 class Command {
   async exec(interaction, channel, path) {
-    if (interaction.member.permissions.has('ADMINISTRATOR')) {
+    if (interaction.member.permissions.has('MANAGE_CHANNELS')) {
       let guildID = interaction.guild.id;
       const servers = JSON.readFileSync(path);
 

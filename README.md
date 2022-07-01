@@ -1,6 +1,6 @@
 # Suggestions Bot
 
-Un bot Discord très complet qui permet a vos membres de faire des suggestions. Ils pourront ensuite voter pour leurs préférés et vous pourrez les accepter ou non.
+Un bot Discord très complet qui permet a vos membres de faire des suggestions. Ils pourront ensuite voter pour leurs préférés et vous pourrez les accepter ou non. Pour plus d'info sur le bot rendez vous sur la page <a href="https://top.gg/bot/939547648438984774">top.gg
 
 ## Installation
 

@@ -21,7 +21,7 @@ class Command {
       .addField('Commandes', '/suggestion <suggestion>\n/accept <messageid>*\n/refuse <messageid>*\n/setup <channel>**\n/comment <messageid> <comment>*\n/help', true)
       .addField("Liens", "Github : https://github.com/Av32000/Suggestions-Bot", true)
       .addField("Permission nécessaire", "*L'utilisateur a besoin de la permission `MANAGE_MESSAGES` pour pouvoir utiliser ces commandes.\n**L'utilisateur a besoin de la permission `MANAGE_CHANNELS` pour pouvoir utiliser cette commande.")
-      .setFooter('Demandé par ' + interaction.user.username, interaction.user.displayAvatarURL())
+      .setFooter('Demandé par ' + interaction.user.username + " | Bot présent sur " + interaction.client.guilds.cache.size + " serveurs", interaction.user.displayAvatarURL())
       .setThumbnail(interaction.client.user.displayAvatarURL())
 
     if (!config) {
